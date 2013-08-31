@@ -36,13 +36,13 @@ module WebConsole
       #
       # Use this method if you need to persist a session, without providing it
       # any input.
-      def create
-        new.persist
+      def create(console_command='rails console')
+        new({console_command: console_command}).persist
       end
     end
 
     def initialize(attributes = {})
-      @slave = WebConsole::Slave.new
+      @slave = WebConsole::Slave.new(attributes[:console_command])
     end
 
     # Explicitly persist the model in the in-memory storage.
